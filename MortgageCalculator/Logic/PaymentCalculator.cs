@@ -5,11 +5,11 @@ namespace MortgageCalculator.Logic
 {
     public class PaymentCalculator
     {
-        private decimal AskingPrice;
-        private decimal DownPayment;
+        private double AskingPrice;
+        private double DownPayment;
         private PaymentScheduleOptions PaymentSchedule;
         private int AmortizationPeriod;
-        private decimal InterestRate;
+        private double InterestRate;
 
         // Makes sure we can actually calculate a payment:
         // - The amortization period enum is valid
@@ -36,33 +36,33 @@ namespace MortgageCalculator.Logic
             }
         }
 
-        public static decimal CalculateRequiredMortgageInsurance(decimal askingPrice, decimal downPayment)
+        public static double CalculateRequiredMortgageInsurance(double askingPrice, double downPayment)
         {
             // No mortgage insurance on homes >= 1mil
-            if (askingPrice >= 1000000.00m)
+            if (askingPrice >= 1000000.00)
             {
-                return 0.0m;
+                return 0.0;
             }
 
-            decimal downpaymentRatio = downPayment / askingPrice;
-            if (downpaymentRatio >= 0.05m && downpaymentRatio < 0.1m)
+            double downpaymentRatio = downPayment / askingPrice;
+            if (downpaymentRatio >= 0.05 && downpaymentRatio < 0.1)
             {
-                return (askingPrice - downPayment) * 0.0315m;
+                return (askingPrice - downPayment) * 0.0315;
             } 
-            else if (downpaymentRatio >= 0.1m && downpaymentRatio < 0.15m)
+            else if (downpaymentRatio >= 0.1 && downpaymentRatio < 0.15)
             {
-                return (askingPrice - downPayment) * 0.024m;
+                return (askingPrice - downPayment) * 0.024;
             }
-            else if (downpaymentRatio >= 0.15m && downpaymentRatio < 0.2m)
+            else if (downpaymentRatio >= 0.15 && downpaymentRatio < 0.2)
             {
-                return (askingPrice - downPayment) * 0.018m;
+                return (askingPrice - downPayment) * 0.018;
             }
 
             // Drop here, its >= 20% down (or <5%, but that should have been caught earlier by the validator)
-            return 0.0m;
+            return 0.0;
         }
 
-        public PaymentCalculator(GetPaymentAmountInput input, decimal interestRate)
+        public PaymentCalculator(GetPaymentAmountInput input, double interestRate)
         {
             this.AskingPrice = input.AskingPrice;
             this.DownPayment = input.DownPayment;
@@ -84,9 +84,9 @@ namespace MortgageCalculator.Logic
             // where l = loan principal
             //       c = interest rate expressed in the period for n (ie. annualized reduced to a week period)
             //       n = number of payments
-            double l = ((double)this.AskingPrice) - ((double)this.DownPayment); 
-            double c = ((double)this.InterestRate) / ((double)this.PaymentSchedule);
-            double n = (double)(this.AmortizationPeriod);
+            double l = this.AskingPrice - this.DownPayment; 
+            double c = this.InterestRate / ((double)this.PaymentSchedule);
+            double n = this.AmortizationPeriod;
 
             // First calculate the (1+c)^n part
             double m = Math.Pow((1 + c), n);

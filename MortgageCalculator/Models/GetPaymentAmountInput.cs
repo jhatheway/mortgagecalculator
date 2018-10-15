@@ -4,8 +4,8 @@ namespace MortgageCalculator.Models
 {
     public class GetPaymentAmountInput
     {
-        public decimal AskingPrice;
-        public decimal DownPayment;
+        public double AskingPrice;
+        public double DownPayment;
         public PaymentScheduleOptions PaymentSchedule;
         public int AmortizationPeriod;
     }

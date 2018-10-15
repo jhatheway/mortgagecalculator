@@ -4,7 +4,7 @@ namespace MortgageCalculator.Models
 {
     public class PatchInterestRateResult
     {
-        public decimal OldRate;
-        public decimal NewRate;
+        public double OldRate;
+        public double NewRate;
     }
 }

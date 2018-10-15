@@ -24,10 +24,10 @@ namespace MortgageCalculator.Controllers
         //
         // Verb/URI: PATCH /interest-rate
         // Input: 
-        //    decimal NewRate - the new rate to be used
+        //    double NewRate - the new rate to be used
         // Output: 
-        //    decimal OldRate - the old rate
-        //    decimal NewRate - the new rate that was just set
+        //    double OldRate - the old rate
+        //    double NewRate - the new rate that was just set
         [HttpPatch("interest-rate")]
         public ActionResult<PatchInterestRateResult> PatchInterestRate([FromBody] PatchInterestRateInput input)
         {
@@ -41,12 +41,12 @@ namespace MortgageCalculator.Controllers
         //
         // Verb/URI: GET /payment-amount
         // Input: 
-        //    decimal AskingPrice - the price of the home
-        //    decimal DownPayment - the downpayment being made 
+        //    double AskingPrice - the price of the home
+        //    double DownPayment - the downpayment being made 
         //    enum    PaymentSchedule - one of "monthly", "biweekly", "weekly"
         //    int     Amortization - loan amortization period, in years    
         // Output: 
-        //    decimal PaymentAmount - the payment amount per scheduled payment
+        //    double PaymentAmount - the payment amount per scheduled payment
         [HttpGet("payment-amount")]
         public ActionResult<GetPaymentAmountResult> GetPaymentAmount([FromBody] GetPaymentAmountInput input)
         {
