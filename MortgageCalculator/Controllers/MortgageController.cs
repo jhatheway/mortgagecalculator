@@ -83,7 +83,7 @@ namespace MortgageCalculator.Controllers
         [HttpGet]
         public ActionResult<string> Get()
         {
-            return new string("Run the script ./tests.sh to show the various endpoints of this program being exercised");
+            return new string("Please see the project's Readme.md to see how to use this");
         }
     }
 }

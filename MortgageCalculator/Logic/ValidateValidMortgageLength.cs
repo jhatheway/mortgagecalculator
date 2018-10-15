@@ -8,7 +8,7 @@ namespace MortgageCalculator.Logic
         public static bool Validate(int amortizationPeriod, PaymentScheduleOptions paymentSchedule)
         {
             double years = amortizationPeriod / (double)paymentSchedule;
-            return (years >= 5.0 && years <= 20.0);
+            return (years >= 5.0 && years <= 25.0);
         }
     }
 }

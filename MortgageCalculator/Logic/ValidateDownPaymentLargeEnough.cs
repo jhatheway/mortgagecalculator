@@ -12,9 +12,16 @@ namespace MortgageCalculator.Logic
             // First, if the downpayment is less than 20% of the asking price,
             // and the asking price is over $1mil, we have to fail right away,
             // since the house can't get mortgage insurance
-            if (askingPrice >= 1000000.00 && (downPayment / askingPrice <= 0.20))
+            if (askingPrice >= 1000000.00)
             {
-                return false;
+                if (downPayment / askingPrice >= 0.20)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
             // Calculate the minimum downpayment: 5% of the first $500k
