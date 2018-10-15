@@ -20,14 +20,39 @@ namespace MortgageCalculator.Controllers
             this.Configuration = config;
         }
 
-        // PATCH interest-rate
+        // Purpose: Replaces the interest rate being used by the given one
+        //
+        // Verb/URI: PATCH /interest-rate
+        // Input: 
+        //    decimal NewRate - the new rate to be used
+        // Output: 
+        //    decimal OldRate - the old rate
+        //    decimal NewRate - the new rate that was just set
         [HttpPatch("interest-rate")]
-        public ActionResult<PatchInterestRateResult> PatchInterestRateInput([FromBody] PatchInterestRateInput input)
+        public ActionResult<PatchInterestRateResult> PatchInterestRate([FromBody] PatchInterestRateInput input)
         {
             var rate = new InterestRate(this.Configuration);
             var oldrate = rate.Rate;
             rate.Rate = input.NewRate;
             return new PatchInterestRateResult { OldRate = oldrate, NewRate = rate.Rate };
+        }
+
+        // Purpose: Calculates the recurring payment for a mortgage, given a number of inputs
+        //
+        // Verb/URI: GET /payment-amount
+        // Input: 
+        //    decimal AskingPrice - the price of the home
+        //    decimal DownPayment - the downpayment being made 
+        //    enum    PaymentSchedule - one of "monthly", "biweekly", "weekly"
+        //    int     Amortization - loan amortization period, in years    
+        // Output: 
+        //    decimal PaymentAmount - the payment amount per scheduled payment
+        [HttpGet("payment-amount")]
+        public ActionResult<GetPaymentAmountResult> GetPaymentAmount([FromBody] GetPaymentAmountInput input)
+        {
+            var interestRate = new InterestRate(this.Configuration);
+            var paymentCalculator = new PaymentCalculator(input, interestRate.Rate);
+            return new GetPaymentAmountResult { PaymentAmount = paymentCalculator.Calculate() };
         }
 
         // GET /
