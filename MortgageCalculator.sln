@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MortgageCalculator", "MortgageCalculator\MortgageCalculator.csproj", "{DAE09F2E-3C14-46A5-96A3-DCB0A59C7709}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{970ECD01-CB4B-4DC0-A41F-21D1FE7CFDB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{DAE09F2E-3C14-46A5-96A3-DCB0A59C7709}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAE09F2E-3C14-46A5-96A3-DCB0A59C7709}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAE09F2E-3C14-46A5-96A3-DCB0A59C7709}.Release|Any CPU.Build.0 = Release|Any CPU
+		{970ECD01-CB4B-4DC0-A41F-21D1FE7CFDB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{970ECD01-CB4B-4DC0-A41F-21D1FE7CFDB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{970ECD01-CB4B-4DC0-A41F-21D1FE7CFDB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{970ECD01-CB4B-4DC0-A41F-21D1FE7CFDB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
