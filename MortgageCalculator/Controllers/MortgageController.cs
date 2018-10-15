@@ -37,14 +37,14 @@ namespace MortgageCalculator.Controllers
             return new PatchInterestRateResult { OldRate = oldrate, NewRate = rate.Rate };
         }
 
-        // Purpose: Calculates the recurring payment for a mortgage, given a number of inputs
+        // Purpose: Calculates the recuring payment for a mortgage, given a number of inputs
         //
         // Verb/URI: GET /payment-amount
         // Input: 
         //    double AskingPrice - the price of the home
         //    double DownPayment - the downpayment being made 
         //    enum    PaymentSchedule - one of "monthly", "biweekly", "weekly"
-        //    int     Amortization - loan amortization period, in years    
+        //    int     AmortizationPeriod - loan amortization period, in years    
         // Output: 
         //    double PaymentAmount - the payment amount per scheduled payment
         [HttpGet("payment-amount")]
@@ -55,7 +55,31 @@ namespace MortgageCalculator.Controllers
             return new GetPaymentAmountResult { PaymentAmount = paymentCalculator.Calculate() };
         }
 
-        // GET /
+        // Purpose: Calculates the maximum mortgage, given a payment and some other inputs
+        //
+        // Verb/URI: GET /mortgage-amount
+        // Input: 
+        //    double PaymentAmount - the amount per payment period
+        //    double DownPayment - the downpayment being made (optional)
+        //    enum    PaymentSchedule - one of "monthly", "biweekly", "weekly"
+        //    int     AmortizationPeriod - loan amortization period, in years    
+        // Output: 
+        //    double MortgageAmount - the maximum mortgage amount for the criteria given
+        [HttpGet("mortgage-amount")]
+        public ActionResult<GetMortgageAmountResult> GetMortgageAmount([FromBody] GetMortgageAmountInput input)
+        {
+            var interestRate = new InterestRate(this.Configuration);
+            var mortgageAmountCalculator = new MortgageAmountCalculator(input, interestRate.Rate);
+            return new GetMortgageAmountResult { PaymentAmount = mortgageAmountCalculator.Calculate() };
+        }
+
+
+        // Purpose: Display some helpful text when you run the project from Visual studio or
+        // simply try to go to the first URI you might think of.
+        //
+        // Verb/URI: GET /
+        // Input: N/A
+        // Output: some helpful text
         [HttpGet]
         public ActionResult<string> Get()
         {
